@@ -36,6 +36,9 @@ ENV/
 *.sqlite
 *.sqlite3
 
+# Data files
+datafiles/
+
 # Environment variables
 .env
 .env.local

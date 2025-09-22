@@ -1,6 +1,6 @@
 # Readme for ELIS v0.1
 
-ELIS is free, open-sourced tool that aims to help users find the right therapist. 
+ELIS is a free, open-sourced tool that aims to help users find the right therapist. 
 
 Version v0.1 is limited to 
 - search only
@@ -9,7 +9,7 @@ Version v0.1 is limited to
 
 ## Database
 
-Our database is compiled from the publicly available list of Psychotherapist [<INSERT SOURCE>]. The related API offers numerous endpoints. To access them, please [<SIGN UP>] for an access key. We recommend reviewing the [<API DOCUMENTATION>] to explore the extensive datasets available.
+Our database is compiled from the publicly available list of Psychotherapists [[Berufsliste (Psychotherapie)](https://psychotherapie.ehealth.gv.at/)]. The related API offers numerous endpoints. To access them, please contact us for an access key. 
 
 ## Parameters
 
@@ -25,7 +25,7 @@ Our database is compiled from the publicly available list of Psychotherapist [<I
 - some disk space (for database)
 
 ### API Access
-- Valid API key (sign up at [registration endpoint])
+- Valid API key (contact us @openelis)
 - HTTPS-enabled application for secure key transmission
 
 ### Development Setup
