@@ -6,7 +6,7 @@ def parse_date(date_str):
     return datetime.strptime(date_str, '%d.%m.%y').date()
 
 def import_csv_data():
-    df = pd.read_csv("datafiles/PTH-CSV-Liste-2025-09-13.csv", sep=';', encoding='latin1')
+    df = pd.read_csv("datafiles/PTH-CSV-Liste-2025-09-13.csv", sep=';', encoding='cp1252')
     session = SessionLocal()
     
     for index, row in df.iterrows():
