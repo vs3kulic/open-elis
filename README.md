@@ -1,46 +1,53 @@
 # Readme for ELIS v0.1
 
-ELIS is a free, open-sourced tool that aims to help users find the right therapist. 
+## Introduction
+ELIS is a non-profit project aimed at lowering the barriers to mental health access. This repository contains the backend implementation of the ELIS API.
 
-Version v0.1 is limited to 
-- search only
-- therapists located in Vienna (AT)
-- therapists with websites
-
-## Database
-
-Our database is compiled from the publicly available list of Psychotherapists [[Berufsliste (Psychotherapie)](https://psychotherapie.ehealth.gv.at/)]. The related API offers numerous endpoints. To access them, please contact us for an access key. 
+## Features
+- Provides information about therapists, their methods, and locations.
+- Supports filtering by geographical location, therapy method, and years of experience.
 
 ## Parameters
+- **Geographical preference**: Filter therapists by district.
+- **Therapist preferences**: Filter by years of experience.
+- **Personal preferences**: Filter by therapy method.
 
-- Geographical preference: location by district
-- Therapist preferences: age group
-- Personal preferences: pth. method (school)
+## Technology Stack
+- **FastAPI**: A modern, fast (high-performance) web framework for building APIs with Python.
+- **SQLite**: Lightweight database for storing therapist data.
+- **SQLAlchemy**: ORM for database interactions.
 
 ## Requirements
-
-### System Requirements
-- Python 3.8+
+- Python 3.10+
+- FastAPI
+- SQLAlchemy
 - SQLite
-- some disk space (for database)
 
-### API Access
-- Valid API key (contact us @openelis)
-- HTTPS-enabled application for secure key transmission
+## Getting Started
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/vs3kulic/open-elis.git
+   ```
+2. Navigate to the project directory:
+   ```bash
+   cd open-elis
+   ```
+3. Create and activate a virtual environment:
+   ```bash
+   python3 -m venv venv
+   source venv/bin/activate
+   ```
+4. Install dependencies:
+   ```bash
+   pip install -r requirements.txt
+   ```
+5. Run the FastAPI application:
+   ```bash
+   uvicorn app.main:app --reload
+   ```
+6. Access the API documentation:
+   - OpenAPI: [http://127.0.0.1:8000/docs](http://127.0.0.1:8000/docs)
+   - ReDoc: [http://127.0.0.1:8000/redoc](http://127.0.0.1:8000/redoc)
 
-### Development Setup
-```bash
-# Clone repository
-git clone [repository-url]
-cd elis
-
-# Create virtual environment
-python3 -m venv venv
-source venv/bin/activate  # On Windows: venv\Scripts\activate
-
-# Install dependencies
-pip install -r [requirements.txt](http://_vscodecontentref_/0)
-
-# Run the application
-uvicorn main:app --reload
-```
+## License
+This project is licensed under the MIT License.

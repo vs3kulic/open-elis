@@ -1,57 +1,53 @@
 # Open ELIS v0.1 - API Documentation
 
 ## Introduction
-Our goal is to lower the barrier to mental health access. 
-
-This database provides you with information about therapists, their methods and locations. You are welcome to use the data in your own apps and non-commercial projects — like we did with creating this API.
-
-This project is non-profit. 
+Open ELIS is a non-profit project aimed at lowering the barriers to mental health access. This API provides information about therapists, their methods, and locations. It is designed for use in apps and non-commercial projects.
 
 ## Endpoints
-The API provides multiple endpoints. 
 
 ### GET /therapists
 
 #### Purpose
-Fetch a list of therapists, but limit the number of results to a maximum of 50 at a time.
-Allow users to paginate through the data using limit and offset query parameters.
+Retrieve a list of therapists with optional filtering and pagination.
+
+#### HTTP Method
+GET
+
+#### URL
+`/therapists`
 
 #### Query Parameters
-- limit (int, optional): Specifies how many therapists to return. 
-    - Default: 10
-    - Maximum: 50
-- offset (int, optional): Specifies how many records to skip (for pagination).
-    - Default: 0
-- district (str, optional): Filters the therapists by district.
-- method (str, optional): Filters the therapists by therapy method.
-- min_experience (int, optional): Filters the therapists by years of experience.
-
-Each filter() call adds a condition to the SQL query.
-These conditions are combined using AND logic in SQL.
-
-For example, if the user provides district="District1", age_group="Adults", and method="Cognitive-Behavioral", the query will look like this:
-```SQL
-SELECT * FROM therapists
-WHERE district = 'District1'
-  AND age_group = 'Adults'
-  AND method = 'Cognitive-Behavioral'
-```
-
+- **limit** (int, optional): Number of therapists to return per request.
+  - Default: 10
+  - Maximum: 50
+- **offset** (int, optional): Number of records to skip for pagination.
+  - Default: 0
+  - Minimum: 0
+- **district** (str, optional): Filter therapists by district.
+- **method** (str, optional): Filter therapists by therapy method.
+- **min_experience** (int, optional): Filter therapists by minimum years of experience.
 
 #### Validation Rules
-- limit must be between 1 and 50.
-- offset must be 0 or greater.
+- `limit` must be between 1 and 50.
+- `offset` must be 0 or greater.
 
 #### Response
-A list of therapists (up to limit therapists).
-Each therapist includes fields like id, first_name, last_name, email, etc.
+A JSON array of therapists, each containing the following fields:
+- `id` (int): Unique identifier.
+- `first_name` (str): Therapist's first name.
+- `last_name` (str): Therapist's last name.
+- `email` (str): Therapist's email address.
+- `state` (str): State where the therapist is located.
+- `postal_code` (str): Postal code of the therapist's location.
+- `therapy_methods` (str): Therapy methods offered by the therapist.
 
-#### Sample Request and Response
-```Python
-# Request
+#### Sample Request
+```http
 GET /therapists?limit=10&offset=20
+```
 
-# Response
+#### Sample Response
+```json
 [
     {
         "id": 21,
@@ -73,3 +69,11 @@ GET /therapists?limit=10&offset=20
     }
 ]
 ```
+
+## Error Handling
+- **400 Bad Request**: Invalid query parameters.
+- **404 Not Found**: No therapists found matching the criteria.
+- **500 Internal Server Error**: Unexpected server error.
+
+## Changelog
+- **v0.1**: Initial release with `/therapists` endpoint.
