@@ -1,4 +1,4 @@
-# Readme for ELIS v0.1
+# Readme for Open ELIS v0.1
 
 ## Introduction
 ELIS is a non-profit project aimed at lowering the barriers to mental health access. This repository contains the backend implementation of the ELIS API.

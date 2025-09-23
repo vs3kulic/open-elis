@@ -1,6 +1,6 @@
+from datetime import date
 from fastapi import FastAPI, Query, Depends
 from sqlalchemy.orm import Session
-from datetime import date
 from data.models import SessionLocal
 from data.models import Therapist
 
