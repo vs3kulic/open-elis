@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ELIS - Find Your Perfect Therapist</title>
+    <meta name="description" content="Discover qualified therapists in your area with our easy-to-use search platform">
+    
+    <!-- Google Fonts - Clean, modern typography -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Our beautiful styles -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Hero Section -->
+    <header class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <img src="images/be_kind_logo.png" alt="Be Kind Logo" class="hero-logo">
+                <h1 class="hero-title">
+                    Finde deinen 
+                    <span class="gradient-text">Therapeuten</span>
+                </h1>
+                <p class="hero-subtitle">
+                    ELIS - Deine Datenbank für Psychotherapeuten in Wien.
+                </p>
+            </div>
+        </div>
+    </header>
+
+    <!-- Search Section -->
+    <main class="search-section">
+        <div class="container">
+            <div class="search-card">
+                <form id="searchForm" class="search-form">
+                    <div class="form-group">
+                        <label for="district" class="form-label">Bezirk</label>
+                        <select id="district" name="district" class="form-select">
+                            <option value="">Alle Bezirke</option>
+                            <option value="1010">1010 - Innere Stadt</option>
+                            <option value="1020">1020 - Leopoldstadt</option>
+                            <option value="1030">1030 - Landstraße</option>
+                            <option value="1040">1040 - Wieden</option>
+                            <option value="1050">1050 - Margareten</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="method" class="form-label">Therapie-Methode</label>
+                        <select id="method" name="method" class="form-select">
+                            <option value="">Alle Therapierichtungen</option>
+                            <option value="Analytische Psychologie">Analytische Psychologie</option>
+                            <option value="Verhaltenstherapie">Verhaltenstherapie</option>
+                            <option value="Daseinsanalyse">Daseinsanalyse</option>
+                            <option value="Systemische Therapie">Systemische Therapie</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="experience" class="form-label">Erfahrung</label>
+                        <select id="experience" name="experience" class="form-select">
+                            <option value="">Alle Erfahrungsstufen</option>
+                            <option value="5">5-10 Jahre</option>
+                            <option value="10">10+ Jahre</option>
+                        </select>
+                    </div>
+
+                    <button type="submit" class="search-button" id="searchButton">
+                        <span class="button-text">Suchen</span>
+                        <span class="button-loader" id="buttonLoader">
+                            <div class="spinner"></div>
+                        </span>
+                    </button>
+                </form>
+            </div>
+        </div>
+    </main>
+
+    <!-- Results Section -->
+    <section class="results-section" id="resultsSection">
+        <div class="container">
+            <div id="resultsContainer" class="results-container">
+                <!-- Results will be dynamically inserted here -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 ELIS. Making mental health care accessible.</p>
+        </div>
+    </footer>
+
+    <!-- Our amazing JavaScript -->
+    <script src="script.js"></script>
+</body>
+</html>

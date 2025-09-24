@@ -1,10 +1,24 @@
 from datetime import date
 from fastapi import FastAPI, Query, Depends
+from fastapi.middleware.cors import CORSMiddleware
 from sqlalchemy.orm import Session
 from data.models import SessionLocal
 from data.models import Therapist
 
 app = FastAPI()
+
+# Add CORS middleware
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["http://127.0.0.1:8001", "http://localhost:8001"], # add PROD when ready
+    allow_credentials=False,  # Set to True only if you need cookies/auth headers
+    allow_methods=["GET", "POST", "OPTIONS"],  # Only methods you actually use
+    allow_headers=[
+        "Accept",
+        "Content-Type", 
+        "X-API-Key",  # Your specific API key header
+    ],
+)
 
 # Dependency to get a database session
 def get_db():
