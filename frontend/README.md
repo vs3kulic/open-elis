@@ -1,16 +1,6 @@
 # ELIS Frontend 🎨
 
-A **beautiful, modern, vanilla JavaScript frontend** for the ELIS Therapist Finder API.
-
-## ✨ Features
-
-- **🎯 Modern Design**: Clean, professional UI with smooth animations
-- **📱 Fully Responsive**: Looks gorgeous on desktop, tablet, and mobile
-- **⚡ Lightning Fast**: No framework overhead, pure vanilla JavaScript
-- **🔄 Real-time Search**: Auto-search as you select criteria
-- **💫 Smooth Animations**: Delightful micro-interactions and loading states
-- **🎨 Beautiful Gradients**: Eye-catching design with professional color palette
-- **♿ Accessible**: Semantic HTML and keyboard navigation support
+A vanilla JavaScript frontend for the ELIS Therapist Finder API.
 
 ## 🚀 Quick Start
 
@@ -32,12 +22,6 @@ A **beautiful, modern, vanilla JavaScript frontend** for the ELIS Therapist Find
    http://127.0.0.1:8001/index.html
    ```
 
-### Production
-Simply upload the `frontend/` folder contents to any static hosting service:
-- **Netlify**: Drag & drop deployment
-- **Vercel**: Connect to GitHub repo
-- **GitHub Pages**: Enable in repository settings
-
 ## 🛠️ Configuration
 
 Update the API configuration in `script.js`:
@@ -51,18 +35,6 @@ this.config = {
     }
 };
 ```
-
-## 🎨 Design System
-
-### Colors
-- **Primary**: `#6366f1` (Indigo)
-- **Secondary**: `#8b5cf6` (Purple)  
-- **Accent**: `#06b6d4` (Cyan)
-- **Success**: `#10b981` (Emerald)
-
-### Typography
-- **Font**: Inter (Google Fonts)
-- **Weights**: 300, 400, 500, 600, 700
 
 ### Components
 - **Hero Section**: Gradient background with floating elements
@@ -89,29 +61,3 @@ Graceful error handling with user-friendly messages for:
 - **Optimized animations**: 60fps smooth transitions
 - **Lazy loading**: Staggered card animations
 - **Minimal footprint**: ~15KB total (gzipped)
-
-## 📱 Browser Support
-
-- ✅ Chrome 60+
-- ✅ Firefox 60+
-- ✅ Safari 12+
-- ✅ Edge 79+
-
-## 🤝 Contributing
-
-This is a student project, but feel free to:
-1. Fork the repository
-2. Create a feature branch
-3. Submit a pull request
-
-## 📄 License
-
-MIT License - feel free to use this code for your own projects!
-
-## 🎯 What Makes This Special
-
-**No Framework, Maximum Beauty** - This frontend proves that you don't need React, Vue, or Angular to create stunning, professional web applications. Sometimes vanilla is the best flavor! 🍦
-
----
-
-*Built with ❤️ by a 2nd semester CS student*
