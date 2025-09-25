@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ELIS - Find Your Perfect Therapist</title>
-    <meta name="description" content="Discover qualified therapists in your area with our easy-to-use search platform">
+    <title>ELIS - Finde deinen Therapeuten</title>
+    <meta name="description" content="Entdecke qualifizierte Therapeuten in deiner Nähe mit unserer benutzerfreundlichen Suchplattform">
     
     <!-- Google Fonts - Clean, modern typography -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -45,17 +45,38 @@
                             <option value="1030">1030 - Landstraße</option>
                             <option value="1040">1040 - Wieden</option>
                             <option value="1050">1050 - Margareten</option>
+                            <option value="1060">1060 - Mariahilf</option>
+                            <option value="1070">1070 - Neubau</option>
+                            <option value="1080">1080 - Josefstadt</option>
+                            <option value="1090">1090 - Alsergrund</option>
+                            <option value="1100">1100 - Favoriten</option>
+                            <option value="1110">1110 - Simmering</option>
+                            <option value="1120">1120 - Meidling</option>
+                            <option value="1130">1130 - Hietzing</option>
+                            <option value="1140">1140 - Penzing</option>
+                            <option value="1150">1150 - Rudolfsheim-Fünfhaus</option>
+                            <option value="1160">1160 - Ottakring</option>
+                            <option value="1170">1170 - Hernals</option>
+                            <option value="1180">1180 - Währing</option>
+                            <option value="1190">1190 - Döbling</option>
+                            <option value="1200">1200 - Brigittenau</option>
+                            <option value="1210">1210 - Floridsdorf</option>
+                            <option value="1220">1220 - Donaustadt</option>
+                            <option value="1230">1230 - Liesing</option>
                         </select>
                     </div>
 
                     <div class="form-group">
-                        <label for="method" class="form-label">Therapie-Methode</label>
+                        <label for="method" class="form-label">
+                            Therapie-Methode 
+                            <span class="info-tooltip" title="Nicht sicher welche Methode zu dir passt? Mach unseren Quiz!">?</span>
+                        </label>
                         <select id="method" name="method" class="form-select">
                             <option value="">Alle Therapierichtungen</option>
                             <option value="Analytische Psychologie">Analytische Psychologie</option>
                             <option value="Verhaltenstherapie">Verhaltenstherapie</option>
-                            <option value="Daseinsanalyse">Daseinsanalyse</option>
                             <option value="Systemische Therapie">Systemische Therapie</option>
+                            <option value="Personenzentrierte Psychotherapie">Personenzentrierte Psychotherapie</option>
                         </select>
                     </div>
 
@@ -75,6 +96,18 @@
                         </span>
                     </button>
                 </form>
+                
+                <!-- Therapy Quiz Call-to-Action -->
+                <div class="quiz-cta">
+                    <div class="quiz-icon">🧠</div>
+                    <h3 class="quiz-title">Welcher Therapie-Typ bist du?</h3>
+                    <p class="quiz-description">Finde es heraus – wir matchen deinen Typ zur Therapie-Methode!</p>
+                    <button class="quiz-button" id="quizButton">
+                        <span class="quiz-button-text">Mach den Quiz</span>
+                        <span class="quiz-button-arrow">→</span>
+                    </button>
+                </div>
+
             </div>
         </div>
     </main>

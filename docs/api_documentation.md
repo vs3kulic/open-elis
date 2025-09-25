@@ -17,15 +17,15 @@ GET
 `/therapists`
 
 #### Query Parameters
-- **limit** (int, optional): Number of therapists to return per request.
+- `limit` (int, optional): Number of therapists to return per request.
   - Default: 10
   - Maximum: 50
-- **offset** (int, optional): Number of records to skip for pagination.
-  - Default: 0
+- 'offset` (int, optional): Number of records to skip for pagination.
   - Minimum: 0
-- **district** (str, optional): Filter therapists by district.
-- **method** (str, optional): Filter therapists by therapy method.
-- **min_experience** (int, optional): Filter therapists by minimum years of experience.
+  - Default: 0
+- `district` (str, optional): Filter therapists by district.
+- `method` (str, optional): Filter therapists by therapy method.
+- `min_experience` (int, optional): Filter therapists by minimum years of experience.
 
 #### Validation Rules
 - `limit` must be between 1 and 50.
