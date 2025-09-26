@@ -76,6 +76,72 @@ body {
     color: var(--gray-800);
     background: var(--gray-50);
     overflow-x: hidden;
+    padding-bottom: 60px; /* Add bottom padding to prevent overlap with footer */
+}
+
+/* ===== GOOGLE-STYLE NAVBAR ===== */
+.navbar {
+    background: var(--gray-50);
+    padding: var(--spacing-lg) 0; /* Add vertical padding */
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    backdrop-filter: blur(10px);
+}
+
+.nav-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 var(--spacing-lg); /* Increase horizontal padding */
+}
+
+.nav-brand {
+    flex: 1; /* This will push nav-links to the right */
+}
+
+.brand-text {
+    font-size: 1.5rem;
+    font-weight: var(--font-weight-bold);
+    background: linear-gradient(135deg, #f472b6 0%, #a855f7 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    letter-spacing: -0.5px;
+}
+
+.nav-links {
+    display: flex;
+    gap: var(--spacing-lg);
+    align-items: center;
+}
+
+.nav-link {
+    color: var(--gray-700);
+    text-decoration: none;
+    font-size: 0.875rem;
+    font-weight: var(--font-weight-normal);
+    padding: var(--spacing-sm) var(--spacing-md);
+    border-radius: var(--radius-sm);
+    transition: var(--transition-fast);
+    position: relative;
+}
+
+.nav-link:hover {
+    color: var(--gray-900);
+    background: rgba(0, 0, 0, 0.04);
+}
+
+.contact-link {
+    background: linear-gradient(135deg, #f472b6 0%, #a855f7 100%);
+    color: white !important;
+    font-weight: var(--font-weight-medium);
+}
+
+.contact-link:hover {
+    background: linear-gradient(135deg, #e879a8 0%, #9333ea 100%);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(244, 114, 182, 0.25);
 }
 
 .container {
@@ -105,8 +171,7 @@ body {
 
 .hero-content {
     text-align: center;
-    position: relative;
-    z-index: 1;
+    margin-bottom: var(--spacing-xl);
 }
 
 .hero-logo {
@@ -123,8 +188,9 @@ body {
     font-size: clamp(2.5rem, 5vw, 4rem);
     font-weight: var(--font-weight-bold);
     color: var(--black);
-    margin-bottom: var(--spacing-lg);
+    margin-bottom: var(--spacing-3xl);
     line-height: 1.1;
+    text-align: center; /* Ensure ELIS is centered */
 }
 
 .gradient-text {
@@ -143,6 +209,15 @@ body {
     font-weight: var(--font-weight-normal);
 }
 
+.hero-tagline {
+    font-size: 1.1rem;
+    color: var(--gray-600);
+    margin-top: var(--spacing-sm);
+    margin-bottom: var(--spacing-xl);
+    font-weight: var(--font-weight-normal);
+    text-align: center;
+}
+
 /* ===== SEARCH SECTION ===== */
 .search-section {
     padding: var(--spacing-2xl) 0;
@@ -152,9 +227,8 @@ body {
 }
 
 .search-card {
-    background: var(--white);
+    background: var(--gray-50);
     border-radius: var(--radius-2xl);
-    box-shadow: var(--shadow-2xl);
     padding: var(--spacing-2xl);
     backdrop-filter: blur(10px);
     border: 1px solid rgba(255, 255, 255, 0.2);
@@ -164,14 +238,32 @@ body {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     gap: var(--spacing-lg);
+    margin-bottom: var(--spacing-xl);
     align-items: end;
 }
 
 .search-button {
+    background: linear-gradient(135deg, #f472b6 0%, #a855f7 50%, #7c3aed 100%);
+    color: var(--white);
+    border: none;
+    padding: var(--spacing-lg) var(--spacing-xl);
+    border-radius: var(--radius-lg);
+    font-size: 1.1rem;
+    font-weight: var(--font-weight-semibold);
+    cursor: pointer;
+    transition: var(--transition-normal);
+    position: relative;
+    overflow: hidden;
+    box-shadow: var(--shadow-md);
+    min-height: 3.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     grid-column: 1 / -1;
     justify-self: center;
-    width: 335px;
-    height: 60px;
+    width: 100%;
+    max-width: 250px;
+    margin-top: var(--spacing-xl); /* Add top margin to create distance */
 }
 
 .form-group {
@@ -191,10 +283,11 @@ body {
     display: inline-block;
     background: linear-gradient(135deg, #f472b6 0%, #a855f7 100%);
     color: white;
+    border: none; /* Remove the border */
     border-radius: 50%;
     width: 22px;
     height: 22px;
-    line-height: 22px;
+    line-height: 20px; /* Adjust line-height to center the text better */
     text-align: center;
     margin-left: 6px;
     font-size: 12px;
@@ -203,11 +296,16 @@ body {
     box-shadow: 0 2px 8px rgba(244, 114, 182, 0.3);
     transition: all 0.1s ease;
     vertical-align: middle;
+    outline: none; /* Remove focus outline */
 }
 
 .info-tooltip:hover {
     transform: scale(1.1);
     box-shadow: 0 4px 12px rgba(244, 114, 182, 0.4);
+}
+
+.info-tooltip:focus {
+    outline: none; /* Remove focus outline when clicked */
 }
 
 @keyframes bounce {
@@ -216,44 +314,39 @@ body {
     60% { transform: translateY(-2px); }
 }
 
-/* ===== QUIZ CALL-TO-ACTION ===== */
+/* ===== QUIZ CALL-TO-ACTION SECTION ===== */
 .quiz-cta {
-    margin-top: var(--spacing-2xl);
+    margin-top: var(--spacing-3xl);
     padding: var(--spacing-xl);
-    background: linear-gradient(135deg, rgba(244, 114, 182, 0.05) 0%, rgba(168, 85, 247, 0.05) 100%);
+    background: linear-gradient(135deg, rgba(244, 114, 182, 0.1) 0%, rgba(168, 85, 247, 0.1) 100%);
     border: 2px solid transparent;
+    border-radius: 16px;
     background-clip: padding-box;
-    border-radius: var(--radius-xl);
-    text-align: center;
     position: relative;
-    overflow: hidden;
-    transition: var(--transition-normal);
+    text-align: center;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(10px);
+    display: none; /* Hidden by default */
+    opacity: 0;
+    transform: translateY(20px);
 }
 
-.quiz-cta::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: linear-gradient(135deg, #f472b6 0%, #a855f7 100%);
-    border-radius: var(--radius-xl);
-    padding: 2px;
-    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-    mask-composite: xor;
-    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-    -webkit-mask-composite: xor;
-    opacity: 0.3;
+.quiz-cta.show {
+    display: block;
+    opacity: 1;
+    transform: translateY(0);
+    animation: slideInFade 0.5s ease-out;
 }
 
-.quiz-cta:hover {
-    transform: translateY(-2px);
-    box-shadow: var(--shadow-lg);
-}
-
-.quiz-cta:hover::before {
-    opacity: 0.6;
+@keyframes slideInFade {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 .quiz-icon {
@@ -343,19 +436,24 @@ body {
     background: linear-gradient(135deg, #f472b6 0%, #a855f7 50%, #7c3aed 100%);
     color: var(--white);
     border: none;
-    padding: var(--spacing-md) var(--spacing-xl);
+    padding: var(--spacing-md) var(--spacing-md);
     border-radius: var(--radius-lg);
-    font-size: 1rem;
+    font-size: 1.1rem;
     font-weight: var(--font-weight-semibold);
     cursor: pointer;
     transition: var(--transition-normal);
     position: relative;
     overflow: hidden;
     box-shadow: var(--shadow-md);
-    min-height: 3rem;
+    min-height: 3.5rem;
     display: flex;
     align-items: center;
     justify-content: center;
+    grid-column: 1 / -1;
+    justify-self: center;
+    width: 100%;
+    max-width: 330px;
+    margin-top: var(--spacing-md);
 }
 
 .search-button:hover {
@@ -523,11 +621,20 @@ body {
 
 /* ===== FOOTER ===== */
 .footer {
-    background: var(--gray-800);
-    color: var(--gray-300);
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: var(--gray-50);
+    backdrop-filter: blur(10px);
+    padding: var(--spacing-sm) 0;
+    z-index: 1000;
+    font-size: 0.875rem;
+    color: var(--gray-600);
+}
+
+.footer .container {
     text-align: center;
-    padding: var(--spacing-xl) 0;
-    margin-top: var(--spacing-3xl);
 }
 
 /* ===== RESPONSIVE DESIGN ===== */
@@ -548,6 +655,15 @@ body {
     
     .therapist-details {
         grid-template-columns: 1fr;
+    }
+    
+    .nav-links {
+        gap: var(--spacing-sm);
+    }
+    
+    .nav-link {
+        font-size: 0.8rem;
+        padding: var(--spacing-xs) var(--spacing-sm);
     }
 }
 

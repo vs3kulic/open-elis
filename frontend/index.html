@@ -16,26 +16,29 @@
 </head>
 
 <body>
-    <!-- Hero Section -->
-    <header class="hero">
+    <!-- Navigation Bar -->
+    <nav class="navbar">
         <div class="container">
-            <div class="hero-content">
-                <img src="images/be_kind_logo.png" alt="Be Kind Logo" class="hero-logo">
-                <h1 class="hero-title">
-                    Finde deinen 
-                    <span class="gradient-text">Therapeuten</span>
-                </h1>
-                <p class="hero-subtitle">
-                    ELIS - Deine Datenbank für Psychotherapeuten in Wien.
-                </p>
+            <div class="nav-content">
+                <div class="nav-brand">
+                </div>
+                <div class="nav-links">
+                    <a href="#" class="nav-link">Hilfe</a>
+                    <a href="#" class="nav-link">Über uns</a>
+                </div>
             </div>
         </div>
-    </header>
+    </nav>
 
     <!-- Search Section -->
     <main class="search-section">
         <div class="container">
             <div class="search-card">
+            <div class="hero-content">
+                <h1 class="hero-title">
+                    <span class="gradient-text">ELIS™</span>
+                </h1>
+            </div>
                 <form id="searchForm" class="search-form">
                     <div class="form-group">
                         <label for="district" class="form-label">Bezirk</label>
@@ -69,11 +72,11 @@
 
                     <div class="form-group">
                         <label for="method" class="form-label">
-                            Therapie-Methode 
-                            <span class="info-tooltip" title="Nicht sicher welche Methode zu dir passt? Mach unseren Quiz!">?</span>
+                            Therapiemethode 
+                            <button type="button" class="info-tooltip" id="quizTooltip" title="Nicht sicher welche Methode zu dir passt? Klick hier für unseren Quiz!">?</button>
                         </label>
                         <select id="method" name="method" class="form-select">
-                            <option value="">Alle Therapierichtungen</option>
+                            <option value="">Alle Therapiemethoden</option>
                             <option value="Analytische Psychologie">Analytische Psychologie</option>
                             <option value="Verhaltenstherapie">Verhaltenstherapie</option>
                             <option value="Systemische Therapie">Systemische Therapie</option>
@@ -104,7 +107,7 @@
                     <h3 class="quiz-title">Welcher Therapie-Typ bist du?</h3>
                     <p class="quiz-description">Finde es heraus – wir matchen deinen Typ zur Therapie-Methode!</p>
                     <button class="quiz-button" id="quizButton">
-                        <span class="quiz-button-text">Mach den Quiz</span>
+                        <span class="quiz-button-text">Mach das Quiz</span>
                         <span class="quiz-button-arrow">→</span>
                     </button>
                 </div>
@@ -114,18 +117,18 @@
     </main>
 
     <!-- Results Section -->
-    <section class="results-section" id="resultsSection">
+    <div id="resultsSection" class="results-section" style="display: none;">
         <div class="container">
             <div id="resultsContainer" class="results-container">
-                <!-- Results will be dynamically inserted here -->
+                <!-- Results will be populated here -->
             </div>
         </div>
-    </section>
+    </div>
 
     <!-- Footer -->
     <footer class="footer">
         <div class="container">
-            <p>&copy; 2025 ELIS. Making mental health care accessible.</p>
+            <p>&copy; 2025 ELIS. All rights reserved.</p>
         </div>
     </footer>
 

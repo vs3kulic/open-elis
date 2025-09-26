@@ -38,22 +38,29 @@ class ElisApp {
     }
     
     bindEvents() {
-        // Search form submission
-        this.elements.searchForm.addEventListener('submit', (e) => {
-            e.preventDefault();
-            this.handleSearch();
-        });
+        this.elements.searchForm.addEventListener('submit', this.handleSearch.bind(this));
         
-        // Auto-search on select change (optional UX enhancement)
-        [this.elements.districtSelect, this.elements.methodSelect, this.elements.experienceSelect]
-            .forEach(select => {
-                select.addEventListener('change', () => {
-                    // Auto-search if at least one field is selected
-                    if (this.hasSearchCriteria()) {
-                        this.handleSearch();
-                    }
-                });
+        // Add click event for quiz tooltip
+        const quizTooltip = document.getElementById('quizTooltip');
+        const quizSection = document.querySelector('.quiz-cta');
+        
+        if (quizTooltip && quizSection) {
+            quizTooltip.addEventListener('click', () => {
+                // Toggle the quiz section visibility
+                if (quizSection.classList.contains('show')) {
+                    quizSection.classList.remove('show');
+                } else {
+                    quizSection.classList.add('show');
+                    // Smooth scroll to quiz section
+                    setTimeout(() => {
+                        quizSection.scrollIntoView({ 
+                            behavior: 'smooth', 
+                            block: 'center' 
+                        });
+                    }, 100);
+                }
             });
+        }
     }
     
     setupFormValidation() {
@@ -76,7 +83,9 @@ class ElisApp {
                this.elements.experienceSelect.value;
     }
     
-    async handleSearch() {
+    async handleSearch(event) {
+        event.preventDefault(); // ← This was missing!
+        
         if (this.isLoading) return;
         
         try {

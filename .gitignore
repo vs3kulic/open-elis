@@ -55,3 +55,9 @@ logs/
 # OS
 .DS_Store
 Thumbs.db
+
+# Shell scripts
+*.sh~
+
+# Local development scripts
+start.sh
