@@ -21,7 +21,7 @@ class Therapist(Base):
     title = Column(String, nullable=True)
     registration_date = Column(Date, nullable=False)
     registration_number = Column(Integer, nullable=False, unique=True)
-    therapy_methods = relationship("TherapyMethod", secondary=therapist_therapy_method, back_populates="therapists")
+    therapy_methods = relationship("TherapyMethod", secondary=therapist_therapy_method, back_populates="therapist")
     contacts = relationship("TherapistContact", back_populates="therapist", uselist=False)
     addresses = relationship("TherapistAddress", back_populates="therapist", uselist=False)
 
@@ -32,7 +32,7 @@ class TherapistContact(Base):
     id = Column(Integer, primary_key=True, autoincrement=True)
     email = Column(String, nullable=False)
     website = Column(String, nullable=True) # until we have more data
-    therapist_id = Column(Integer, ForeignKey("therapists.id"))
+    therapist_id = Column(Integer, ForeignKey("therapists.id"), nullable=False)
     therapist = relationship("Therapist", back_populates="contacts")
 
 class TherapistAddress(Base):
@@ -42,8 +42,8 @@ class TherapistAddress(Base):
     id = Column(Integer, primary_key=True, autoincrement=True)
     state = Column(String, nullable=False)
     postal_code = Column(String, nullable=False)
-    therapist_id = Column(Integer, ForeignKey("therapists.id"))
-    therapist = relationship("Therapist", back_populates="addresses")
+    therapist_id = Column(Integer, ForeignKey("therapists.id"), nullable=False)
+    therapist = relationship("Therapist", back_populates="addresses") # one-to-many
 
 class TherapyMethod(Base):
     """Data model for therapy methods, as indicated by source data."""
@@ -51,13 +51,9 @@ class TherapyMethod(Base):
 
     id = Column(Integer, primary_key=True, autoincrement=True)
     method_name = Column(String, nullable=False, unique=False)
-
-    # Relationship to Therapist
-    therapists = relationship("Therapist", secondary=therapist_therapy_method, back_populates="therapy_methods")
-
-    # Relationship to TherapyMethodCluster
-    cluster_id = Column(Integer, ForeignKey("therapy_method_clusters.id"))
+    cluster_id = Column(Integer, ForeignKey("therapy_method_clusters.id"), nullable=False)
     therapy_cluster = relationship("TherapyMethodCluster", back_populates="methods", uselist=False)
+    therapist = relationship("Therapist", secondary=therapist_therapy_method, back_populates="therapy_methods")
 
 class TherapyMethodCluster(Base):
     """Data model for therapy clusters, as per official documentation."""
@@ -67,12 +63,7 @@ class TherapyMethodCluster(Base):
     cluster_short = Column(String, nullable=False, unique=True)
     cluster_name = Column(String, nullable=False, unique=True)
     description = Column(String, nullable=True, unique=False)
-    
-    # Relationship to TherapyMethod
     methods = relationship("TherapyMethod", back_populates="therapy_cluster")
-    
-    # One-to-One relationship with TherapyType
-    therapy_type = relationship("TherapyType", back_populates="therapy_cluster", uselist=False)
 
 class TherapyType(Base):
     """Data model for therapy types, calculated by Q&A flow."""
@@ -82,10 +73,9 @@ class TherapyType(Base):
     type_short = Column(String, nullable=False, unique=True)
     type_name = Column(String, nullable=False, unique=True)
     description = Column(String, nullable=False, unique=False)
-    
-    # One-to-One relationship with TherapyMethodCluster
-    cluster_id = Column(Integer, ForeignKey("therapy_method_clusters.id"))
+    cluster_id = Column(Integer, ForeignKey("therapy_method_clusters.id"), nullable=False)
     therapy_cluster = relationship("TherapyMethodCluster", back_populates="therapy_type", uselist=False)
+
 
 # Database setup
 DATABASE_URL = "sqlite:///./therapists.db"
