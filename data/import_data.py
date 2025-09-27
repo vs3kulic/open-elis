@@ -1,6 +1,6 @@
 import pandas as pd
 from datetime import datetime
-from .models import Therapist, TherapyMethod, SessionLocal
+from .models import SessionLocal, Therapist, TherapistAddress, TherapistContact, TherapyMethod
 
 def parse_date(date_str):
     return datetime.strptime(date_str, '%d.%m.%y').date()
@@ -15,14 +15,27 @@ def import_csv_data():
             last_name=row['Familien-/Nachname'],
             first_name=row['Vorname'] or '',
             title=row['Titel'] or '',
-            email=row['Email1'],
             registration_date=parse_date(row['Eintragungdatum']),
             registration_number=int(row['Eintragungs Nummer']),
-            state=row['Berufssitz Bundesland 1'],
-            postal_code=row['Berufssitz PLZ 1'],
         )
         session.add(therapist)
         session.flush()  # Flush to get therapist.id
+        
+        # Add therapist contact
+        contact = TherapistContact(
+            email=row['Email1'],
+            website=row.get('Website', None),  # Handle missing website gracefully
+            therapist=therapist  # Associate contact with therapist
+        )
+        session.add(contact)
+        
+        # Add therapist address
+        address = TherapistAddress(
+            state=row['Berufssitz Bundesland 1'],
+            postal_code=row['Berufssitz PLZ 1'],
+            therapist=therapist
+        )
+        session.add(address)
 
         # Add therapy methods
         methods = row['PTH-Methoden'].split(',')
@@ -37,6 +50,11 @@ def import_csv_data():
             # Check if the relationship already exists
             if therapy_method not in therapist.therapy_methods:
                 therapist.therapy_methods.append(therapy_method)
+
+        print(f"Inserting therapist: {row['Familien-/Nachname']}, {row['Vorname']}")
+        print(f"Inserting contact: {row['Email1']}")
+        print(f"Inserting address: {row['Berufssitz Bundesland 1']}, {row['Berufssitz PLZ 1']}")
+        print(f"Inserting therapy methods: {methods}")
 
     session.commit()
     session.close()
