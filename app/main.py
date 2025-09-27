@@ -1,9 +1,10 @@
 from datetime import date
-from fastapi import FastAPI, Query, Depends
+from fastapi import FastAPI, Query, Depends, Body
 from fastapi.middleware.cors import CORSMiddleware
 from sqlalchemy.orm import Session
 from data.models import SessionLocal
 from data.models import Therapist, TherapistAddress, TherapyMethod, TherapyMethodCluster, TherapyType
+from data.questionnaire import load_mapping, process_response, calculate_recommendations
 
 app = FastAPI()
 
