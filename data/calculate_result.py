@@ -1,3 +1,4 @@
+"""This module processes questionnaire responses to recommend therapy clusters"""
 import json
 
 # Load mapping from JSON file
