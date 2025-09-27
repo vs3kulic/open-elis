@@ -74,7 +74,7 @@ class TherapyType(Base):
     type_name = Column(String, nullable=False, unique=True)
     description = Column(String, nullable=False, unique=False)
     cluster_id = Column(Integer, ForeignKey("therapy_method_clusters.id"), nullable=False)
-    therapy_cluster = relationship("TherapyMethodCluster", back_populates="therapy_type", uselist=False)
+    therapy_cluster = relationship("TherapyMethodCluster", uselist=False)
 
 
 # Database setup
