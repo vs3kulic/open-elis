@@ -3,7 +3,7 @@ from fastapi import FastAPI, Query, Depends
 from fastapi.middleware.cors import CORSMiddleware
 from sqlalchemy.orm import Session
 from data.models import SessionLocal
-from data.models import Therapist, TherapistAddress, TherapyMethod, TherapyMethodCluster
+from data.models import Therapist, TherapistAddress, TherapyMethod, TherapyMethodCluster, TherapyType
 
 app = FastAPI()
 
@@ -44,7 +44,7 @@ def get_therapists(
     # Base query
     query = db.query(Therapist)
 
-    # Filter by therapist experience, postal code (join with TherapistAddress) or therapy method (join with TherapyMethod)
+    # Filter by experience, postal code or therapy method
     if min_experience:
         min_experience_date = date.today().replace(year=date.today().year - min_experience)
         query = query.filter(Therapist.registration_date <= min_experience_date)
@@ -58,12 +58,17 @@ def get_therapists(
     return therapists
 
 @app.get("/therapy_methods")
-def get_therapy_methods(limit: int = Query(25), offset: int = Query(0), method_name: str = Query(None),
-                   therapy_cluster: str = Query(None), db: Session = Depends(get_db)):
-
+def get_therapy_methods(
+    limit: int = Query(25),
+    offset: int = Query(0),
+    method_name: str = Query(None),
+    therapy_cluster: str = Query(None),
+    db: Session = Depends(get_db)
+):
     # Base query
     query = db.query(TherapyMethod)
-
+    
+    # Filter by method name or therapy cluster
     if method_name:
         query = query.filter(TherapyMethod.method_name == method_name)
     if therapy_cluster:
@@ -72,5 +77,45 @@ def get_therapy_methods(limit: int = Query(25), offset: int = Query(0), method_n
                 TherapyMethodCluster.cluster_short == therapy_cluster
         )
 
+    # Apply pagination
     therapy_methods = query.offset(offset).limit(limit).all()
     return therapy_methods
+
+@app.get("/therapy_clusters")
+def get_therapy_clusters(
+    limit: int = Query(10),
+    offset: int = Query(0),
+    cluster_short: str = Query(None),
+    db: Session = Depends(get_db)
+):
+    # Base query
+    query = db.query(TherapyMethodCluster)
+
+    # Filter by cluster short code
+    if cluster_short:
+        query = query.filter(TherapyMethodCluster.cluster_short == cluster_short)
+
+    # Apply pagination
+    clusters = query.offset(offset).limit(limit).all()
+    return clusters
+
+@app.get("/therapy_types")
+def get_therapy_types(
+    limit: int = Query(10),
+    offset: int = Query(0),
+    cluster_short: str = Query(None),
+    db: Session = Depends(get_db)
+):
+    # Base query
+    query = db.query(TherapyType)
+
+    # Filter by cluster short code
+    if cluster_short:
+        query = query.join(
+            TherapyType.therapy_cluster).filter(
+                TherapyMethodCluster.cluster_short == cluster_short
+        )
+
+    # Apply pagination
+    clusters = query.offset(offset).limit(limit).all()
+    return clusters
