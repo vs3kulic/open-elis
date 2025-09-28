@@ -1,0 +1,160 @@
+{
+  "responses": [
+    {
+      "question_id": 1,
+      "options": ["Strukturiert-Hierarchisch", "Offen-Ebenbürtig"],
+      "selected_option": "Strukturiert-Hierarchisch",
+      "cluster_points": ["PA", "VT"]
+    },
+    {
+      "question_id": 2,
+      "options": ["Strukturiert-Hierarchisch", "Offen-Ebenbürtig"],
+      "selected_option": "Offen-Ebenbürtig",
+      "cluster_points": ["PZ", "SYS"]
+    },
+    {
+      "question_id": 3,
+      "options": ["Abstrakt-Sano", "Praktisch-Corpore"],
+      "selected_option": "Abstrakt-Sano",
+      "cluster_points": ["SYS", "VT"]
+    },
+    {
+      "question_id": 4,
+      "options": ["Kopf", "Herz"],
+      "selected_option": "Kopf",
+      "cluster_points": ["PA", "VT"]
+    },
+    {
+      "question_id": 5,
+      "options": ["Introversion", "Extraversion"],
+      "selected_option": "Extraversion",
+      "cluster_points": ["G"]
+    },
+    {
+      "question_id": 6,
+      "options": ["Rational", "Emotional"],
+      "selected_option": "Rational",
+      "cluster_points": ["PA", "SYS"]
+    },
+    {
+      "question_id": 7,
+      "options": ["Individualistisch", "Kollektivistisch"],
+      "selected_option": "Kollektivistisch",
+      "cluster_points": ["VT", "PZ"]
+    },
+    {
+      "question_id": 8,
+      "options": ["Praktisch", "Theoretisch"],
+      "selected_option": "Praktisch",
+      "cluster_points": ["SYS", "G"]
+    },
+    {
+      "question_id": 9,
+      "options": ["Direkt", "Indirekt"],
+      "selected_option": "Direkt",
+      "cluster_points": ["PA", "VT"]
+    },
+    {
+      "question_id": 10,
+      "options": ["Strukturiert", "Flexibel"],
+      "selected_option": "Flexibel",
+      "cluster_points": ["PZ", "SYS"]
+    },
+    {
+      "question_id": 11,
+      "options": ["Analytisch", "Kreativ"],
+      "selected_option": "Analytisch",
+      "cluster_points": ["PA", "SYS"]
+    },
+    {
+      "question_id": 12,
+      "options": ["Introvertiert", "Extrovertiert"],
+      "selected_option": "Extrovertiert",
+      "cluster_points": ["VT", "G"]
+    },
+    {
+      "question_id": 13,
+      "options": ["Logisch", "Intuitiv"],
+      "selected_option": "Logisch",
+      "cluster_points": ["PA", "SYS"]
+    },
+    {
+      "question_id": 14,
+      "options": ["Selbstständig", "Teamorientiert"],
+      "selected_option": "Teamorientiert",
+      "cluster_points": ["VT", "PZ"]
+    },
+    {
+      "question_id": 15,
+      "options": ["Pragmatisch", "Visionär"],
+      "selected_option": "Pragmatisch",
+      "cluster_points": ["SYS", "G"]
+    },
+    {
+      "question_id": 16,
+      "options": ["Faktenbasiert", "Gefühlsbasiert"],
+      "selected_option": "Faktenbasiert",
+      "cluster_points": ["PA", "SYS"]
+    },
+    {
+      "question_id": 17,
+      "options": ["Unabhängig", "Kooperativ"],
+      "selected_option": "Kooperativ",
+      "cluster_points": ["VT", "PZ"]
+    },
+    {
+      "question_id": 18,
+      "options": ["Praktisch", "Abstrakt"],
+      "selected_option": "Praktisch",
+      "cluster_points": ["SYS", "G"]
+    },
+    {
+      "question_id": 19,
+      "options": ["Direkt", "Indirekt"],
+      "selected_option": "Indirekt",
+      "cluster_points": ["PZ", "VT"]
+    },
+    {
+      "question_id": 20,
+      "options": ["Strukturiert", "Spontan"],
+      "selected_option": "Strukturiert",
+      "cluster_points": ["PA", "SYS"]
+    },
+    {
+      "question_id": 21,
+      "options": ["Analytisch", "Kreativ"],
+      "selected_option": "Kreativ",
+      "cluster_points": ["VT", "G"]
+    },
+    {
+      "question_id": 22,
+      "options": ["Introvertiert", "Extrovertiert"],
+      "selected_option": "Introvertiert",
+      "cluster_points": ["PA", "SYS"]
+    },
+    {
+      "question_id": 23,
+      "options": ["Logisch", "Emotional"],
+      "selected_option": "Emotional",
+      "cluster_points": ["VT", "PZ"]
+    },
+    {
+      "question_id": 24,
+      "options": ["Selbstständig", "Teamorientiert"],
+      "selected_option": "Selbstständig",
+      "cluster_points": ["PA", "SYS"]
+    },
+    {
+      "question_id": 25,
+      "options": ["Pragmatisch", "Visionär"],
+      "selected_option": "Visionär",
+      "cluster_points": ["VT", "G"]
+    },
+    {
+      "question_id": 26,
+      "options": ["Faktenbasiert", "Gefühlsbasiert"],
+      "selected_option": "Gefühlsbasiert",
+      "cluster_points": ["VT", "PZ"]
+    }
+  ]
+}

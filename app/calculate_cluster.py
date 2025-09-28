@@ -5,11 +5,10 @@ def process_all_responses(responses):
     """
     Processes all responses and calculates scores for each cluster.
 
-    Args:
-        responses (list): List of response objects from the frontend.
-
-    Returns:
-        dict: Scores for each cluster.
+    :param responses: List of response objects from the frontend.
+    :type responses: list
+    :return: Scores for each cluster.
+    :rtype: dict
     """
     # Initialize scores for clusters
     scores = {}
@@ -25,11 +24,10 @@ def calculate_cluster(scores):
     """
     Determines the cluster with the highest score.
 
-    Args:
-        scores (dict): Scores for each cluster.
-
-    Returns:
-        str: The cluster with the highest score.
+    :param scores: Scores for each cluster.
+    :type scores: dict
+    :return: The cluster with the highest score.
+    :rtype: str
     """
     # Add score tuples to a list for sorting
     sorted_scores = []

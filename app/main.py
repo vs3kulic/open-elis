@@ -4,6 +4,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from sqlalchemy.orm import Session
 from data.models import SessionLocal
 from data.models import Therapist, TherapistAddress, TherapyMethod, TherapyMethodCluster, TherapyType
+from app.calculate_cluster import process_all_responses, calculate_cluster
 
 app = FastAPI()
 
@@ -30,6 +31,13 @@ def get_db():
 
 @app.get("/")
 def read_root():
+    """
+    Root endpoint to verify the API is running.
+    
+    :param: None
+    :return: A welcome message.
+    :rtype: dict
+    """
     return {"message": "Welcome to the Therapist Database API!"}
 
 @app.get("/therapists")
@@ -39,8 +47,21 @@ def get_therapists(
     min_experience: int = Query(None),
     therapy_method: str = Query(None),
     postal_code: str = Query(None),
+    cluster_short: str = Query(None),
     db: Session = Depends(get_db)
 ):
+    """
+    Retrieve a list of therapists with optional filtering.
+    
+    :param limit: Maximum number of results to return (default is 10).
+    :param offset: Number of results to skip for pagination (default is 0).
+    :param min_experience: Minimum years of experience required.
+    :param therapy_method: Filter by specific therapy method.
+    :param postal_code: Filter by postal code.
+    :param db: Database session dependency.
+    :return: List of therapists matching the criteria.
+    :rtype: List[Therapist]
+    """
     # Base query
     query = db.query(Therapist)
 
@@ -49,9 +70,25 @@ def get_therapists(
         min_experience_date = date.today().replace(year=date.today().year - min_experience)
         query = query.filter(Therapist.registration_date <= min_experience_date)
     if postal_code:
-        query = query.join(TherapistAddress).filter(TherapistAddress.postal_code == postal_code)
+        query = query.join(
+            TherapistAddress
+            ).filter(
+                TherapistAddress.postal_code == postal_code
+            )
     if therapy_method:
-        query = query.join(TherapyMethod, Therapist.therapy_methods).filter(TherapyMethod.method_name == therapy_method)
+        query = query.join(
+            TherapyMethod, Therapist.therapy_methods
+            ).filter(
+                TherapyMethod.method_name == therapy_method
+            )
+    if cluster_short:
+        query = query.join(
+            TherapyMethod, Therapist.therapy_methods
+        ).join(
+            TherapyMethod.therapy_cluster
+        ).filter(
+            TherapyMethodCluster.cluster_short == cluster_short
+        )
 
     # Apply pagination
     therapists = query.offset(offset).limit(limit).all()
@@ -65,6 +102,17 @@ def get_therapy_methods(
     cluster_short: str = Query(None),
     db: Session = Depends(get_db)
 ):
+    """
+    Retrieve a list of therapy methods with optional filtering.
+    
+    :param limit: Maximum number of results to return (default is 25).
+    :param offset: Number of results to skip for pagination (default is 0).
+    :param method_name: Filter by specific therapy method name.
+    :param cluster_short: Filter by therapy cluster short code.
+    :param db: Database session dependency.
+    :return: List of therapy methods matching the criteria.
+    :rtype: List[TherapyMethod]
+    """
     # Base query
     query = db.query(TherapyMethod)
 
@@ -88,6 +136,16 @@ def get_therapy_clusters(
     cluster_short: str = Query(None),
     db: Session = Depends(get_db)
 ):
+    """
+    Retrieve a list of therapy method clusters with optional filtering.
+    
+    :param limit: Maximum number of results to return (default is 10).
+    :param offset: Number of results to skip for pagination (default is 0).
+    :param cluster_short: Filter by therapy cluster short code.
+    :param db: Database session dependency.
+    :return: List of therapy method clusters matching the criteria.
+    :rtype: List[TherapyMethodCluster]
+    """
     # Base query
     query = db.query(TherapyMethodCluster)
 
@@ -106,6 +164,16 @@ def get_therapy_types(
     cluster_short: str = Query(None),
     db: Session = Depends(get_db)
 ):
+    """
+    Retrieve a list of therapy types with optional filtering.
+    
+    :param limit: Maximum number of results to return (default is 10).
+    :param offset: Number of results to skip for pagination (default is 0).
+    :param cluster_short: Filter by therapy cluster short code.
+    :param db: Database session dependency.
+    :return: List of therapy types matching the criteria.
+    :rtype: List[TherapyType]
+    """
     # Base query
     query = db.query(TherapyType)
 
@@ -119,3 +187,23 @@ def get_therapy_types(
     # Apply pagination
     clusters = query.offset(offset).limit(limit).all()
     return clusters
+
+@app.post("/calculate_result")
+def calculate_result(payload: dict):
+    """
+    Calculate the recommended therapy cluster based on questionnaire responses.
+
+    :param payload: JSON payload containing questionnaire responses.
+    :type payload: dict
+    :return: Recommended therapy cluster.
+    :rtype: dict
+    """
+    responses = payload.get("responses", [])
+    if not responses:
+        return {"error": "No responses provided"}, 400
+
+    # Process responses, calculate scores, and determine best cluster
+    scores = process_all_responses(responses)
+    best_cluster = calculate_cluster(scores)
+
+    return {"recommended_cluster": best_cluster}
