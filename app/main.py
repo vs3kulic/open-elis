@@ -62,19 +62,19 @@ def get_therapy_methods(
     limit: int = Query(25),
     offset: int = Query(0),
     method_name: str = Query(None),
-    therapy_cluster: str = Query(None),
+    cluster_short: str = Query(None),
     db: Session = Depends(get_db)
 ):
     # Base query
     query = db.query(TherapyMethod)
-    
+
     # Filter by method name or therapy cluster
     if method_name:
         query = query.filter(TherapyMethod.method_name == method_name)
-    if therapy_cluster:
+    if cluster_short:
         query = query.join(
             TherapyMethod.therapy_cluster).filter(
-                TherapyMethodCluster.cluster_short == therapy_cluster
+                TherapyMethodCluster.cluster_short == cluster_short
         )
 
     # Apply pagination
