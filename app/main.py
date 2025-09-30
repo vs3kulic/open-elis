@@ -80,17 +80,19 @@ def read_root():
 
 @app.get("/therapists")
 def get_therapists(
+    _api_key: str = Depends(validate_api_key), # unused argument
+    db: Session = Depends(get_db),
     limit: int = Query(10),
     offset: int = Query(0),
     min_experience: int = Query(None),
     therapy_method: str = Query(None),
     postal_code: str = Query(None),
-    cluster_short: str = Query(None),
-    db: Session = Depends(get_db)
+    cluster_short: str = Query(None)
 ):
     """
     Retrieve a list of therapists with optional filtering.
     
+    :param api_key: API key for authentication (validated).
     :param limit: Maximum number of results to return (default is 10).
     :param offset: Number of results to skip for pagination (default is 0).
     :param min_experience: Minimum years of experience required.
@@ -134,15 +136,17 @@ def get_therapists(
 
 @app.get("/therapy_methods")
 def get_therapy_methods(
+    _api_key: str = Depends(validate_api_key), # unused argument
+    db: Session = Depends(get_db),
     limit: int = Query(25),
     offset: int = Query(0),
     method_name: str = Query(None),
     cluster_short: str = Query(None),
-    db: Session = Depends(get_db)
 ):
     """
     Retrieve a list of therapy methods with optional filtering.
     
+    :param api_key: API key for authentication (validated).
     :param limit: Maximum number of results to return (default is 25).
     :param offset: Number of results to skip for pagination (default is 0).
     :param method_name: Filter by specific therapy method name.
@@ -169,14 +173,16 @@ def get_therapy_methods(
 
 @app.get("/therapy_clusters")
 def get_therapy_clusters(
+    _api_key: str = Depends(validate_api_key), # unused argument
+    db: Session = Depends(get_db),
     limit: int = Query(10),
     offset: int = Query(0),
-    cluster_short: str = Query(None),
-    db: Session = Depends(get_db)
+    cluster_short: str = Query(None)
 ):
     """
     Retrieve a list of therapy method clusters with optional filtering.
     
+    :param api_key: API key for authentication (validated).
     :param limit: Maximum number of results to return (default is 10).
     :param offset: Number of results to skip for pagination (default is 0).
     :param cluster_short: Filter by therapy cluster short code.
@@ -197,19 +203,20 @@ def get_therapy_clusters(
 
 @app.get("/therapy_types")
 def get_therapy_types(
-    api_key: str = Depends(validate_api_key), # pylint: disable=unused-argument
+    _api_key: str = Depends(validate_api_key), # unused argument
     db: Session = Depends(get_db),
     limit: int = Query(10),
     offset: int = Query(0),
-    cluster_short: str = Query(None),
+    cluster_short: str = Query(None)
 ):
     """
     Retrieve a list of therapy types with optional filtering.
     
+    :param api_key: API key for authentication (validated).
+    :param db: Database session dependency.
     :param limit: Maximum number of results to return (default is 10).
     :param offset: Number of results to skip for pagination (default is 0).
     :param cluster_short: Filter by therapy cluster short code.
-    :param db: Database session dependency.
     :return: List of therapy types matching the criteria.
     :rtype: List[TherapyType]
     """
@@ -228,10 +235,14 @@ def get_therapy_types(
     return clusters
 
 @app.post("/calculate_result")
-def calculate_result(payload: dict):
+def calculate_result(
+    payload: dict,
+    _api_key: str = Depends(validate_api_key)
+):
     """
     Calculate the recommended therapy cluster based on questionnaire responses.
 
+    :param api_key: API key for authentication (validated).
     :param payload: JSON payload containing questionnaire responses.
     :type payload: dict
     :return: Recommended therapy cluster.
