@@ -36,10 +36,9 @@ def calculate_cluster(scores):
 
     # Perform bubble sort to sort scores in descending order
     n = len(sorted_scores)
-
     for i in range(n):
         for j in range(0, n - i - 1):
-            if sorted_scores[j][1] < sorted_scores[j + 1][1]:  # Compare scores
+            if sorted_scores[j][1] < sorted_scores[j + 1][1]:
                 sorted_scores[j], sorted_scores[j + 1] = sorted_scores[j + 1], sorted_scores[j]
 
     # Get the key of the highest score

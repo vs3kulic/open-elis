@@ -1,12 +1,54 @@
+"""This module contains the FastAPI apps and endpoints for the therapist database."""
 from datetime import date
-from fastapi import FastAPI, Query, Depends
+import os
+from fastapi import FastAPI, Query, Depends, HTTPException
+from fastapi.security import APIKeyHeader
 from fastapi.middleware.cors import CORSMiddleware
+from dotenv import load_dotenv
 from sqlalchemy.orm import Session
 from data.models import SessionLocal
 from data.models import Therapist, TherapistAddress, TherapyMethod, TherapyMethodCluster, TherapyType
 from app.calculate_cluster import process_all_responses, calculate_cluster
 
+# ------------------------------
+# API and Database Setup
+# ------------------------------
+
+# Load environment variables from .env file, retrieve API key
+load_dotenv()
+API_KEY = os.getenv("API_KEY")
+
+# Define the API key header
+API_KEY_NAME = "X-API-Key"
+api_key_header = APIKeyHeader(name=API_KEY_NAME, auto_error=True)
+
+# Create FastAPI app instance
 app = FastAPI()
+
+# ------------------------------
+# Dependencies and Middleware
+# ------------------------------
+
+# Dependency to get a database session
+def get_db():
+    db = SessionLocal()
+    try:
+        yield db
+    finally:
+        db.close()
+
+# Dependency to validate the API key
+def validate_api_key(api_key: str = Depends(api_key_header)):
+    """
+    Validate the provided API key against the expected value.
+    
+    :param api_key: The API key provided in the request header.
+    :type api_key: str
+    :raises HTTPException: If the API key is invalid.
+    :return: None
+    """
+    if api_key != API_KEY:
+        raise HTTPException(status_code=401, detail="Invalid API Key")
 
 # Add CORS middleware
 app.add_middleware(
@@ -21,13 +63,9 @@ app.add_middleware(
     ],
 )
 
-# Dependency to get a database session
-def get_db():
-    db = SessionLocal()
-    try:
-        yield db
-    finally:
-        db.close()
+# ------------------------------
+# API Endpoints
+# ------------------------------
 
 @app.get("/")
 def read_root():
@@ -159,10 +197,11 @@ def get_therapy_clusters(
 
 @app.get("/therapy_types")
 def get_therapy_types(
+    api_key: str = Depends(validate_api_key), # pylint: disable=unused-argument
+    db: Session = Depends(get_db),
     limit: int = Query(10),
     offset: int = Query(0),
     cluster_short: str = Query(None),
-    db: Session = Depends(get_db)
 ):
     """
     Retrieve a list of therapy types with optional filtering.
