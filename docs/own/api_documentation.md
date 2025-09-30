@@ -1,9 +1,30 @@
 # Open ELIS v0.1 - API Documentation
 
 ## Introduction
-Open ELIS is a non-profit project aimed at lowering the barriers to mental health access. This API provides information about therapists, their methods, and locations. It is designed for use in apps and non-commercial projects.
+Open ELIS provides therapist data and therapy method information through a REST API. The API supports filtering and pagination for all endpoints.
+
+## Authentication
+All endpoints require an `X-API-Key` header for authentication.
+
+```http
+X-API-Key: your_api_key_here
+```
 
 ## Endpoints
+
+### GET /
+
+#### Purpose
+API status and welcome message.
+
+#### Response
+```json
+{
+    "message": "Welcome to the Therapist Database API!"
+}
+```
+
+---
 
 ### GET /therapists
 
@@ -17,14 +38,12 @@ GET
 `/therapists`
 
 #### Query Parameters
-- `limit` (int, optional): Number of therapists to return per request.
-  - Default: 10
-- `offset` (int, optional): Number of records to skip for pagination.
-  - Minimum: 0
-  - Default: 0
-- `postal_code` (str, optional): Filter therapists by postal code.
-- `therapy_method` (str, optional): Filter therapists by therapy method name.
-- `min_experience` (int, optional): Filter therapists by minimum years of experience.
+- `limit` (int, optional): Number of therapists to return per request. Default: 10
+- `offset` (int, optional): Number of records to skip for pagination. Default: 0
+- `postal_code` (str, optional): Filter therapists by postal code
+- `therapy_method` (str, optional): Filter therapists by therapy method name
+- `min_experience` (int, optional): Filter therapists by minimum years of experience
+- `cluster_short` (str, optional): Filter by therapy cluster code (PA, HT, ST, VT)
 
 #### Validation Rules
 - `limit` must be a positive integer.
