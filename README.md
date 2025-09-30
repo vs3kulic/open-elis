@@ -16,14 +16,25 @@ elis/
 │   │   ├── calculate_result.py # Questionnaire processing
 │   │   └── root.py            # Root endpoint
 │   ├── utils/                 # Utility modules
-│   │   ├── auth.py           # API key validation
+│   │   ├── validate_api_key.py # API key validation
 │   │   ├── db.py             # Database session management
 │   │   ├── middleware.py     # CORS and other middleware
 │   │   └── api_key_generator.py # API key generation
-│   └── calculate_cluster.py   # Questionnaire scoring logic
+│   └── calculations/          # Calculation modules
+│       └── calculate_cluster.py # Questionnaire scoring logic
 ├── data/
-│   ├── models.py             # SQLAlchemy database models
-│   └── SessionLocal.py       # Database session configuration
+│   ├── models.py             # SQLAlchemy database models and SessionLocal
+│   ├── import_data.py        # CSV data import functionality
+│   ├── populate_tables.py    # Database table population
+│   └── run_mappings.py       # Therapy method and cluster mappings
+├── datafiles/
+│   ├── mapping.json          # Therapy method mappings
+│   ├── questions.json        # Questionnaire questions
+│   └── PTH-CSV-Liste-2025-09-13.csv # Therapist data
+├── docs/
+│   └── own/
+│       ├── api_documentation.md # API endpoint documentation
+│       └── db_documentation.md  # Database schema documentation
 ├── logs/
 │   └── worklog.md           # Development log
 └── tests/                   # Test files
