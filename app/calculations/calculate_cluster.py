@@ -1,5 +1,4 @@
 """This module processes questionnaire responses to recommend therapy clusters"""
-# pylint: disable=consider-using-enumerate
 
 def process_all_responses(responses):
     """
