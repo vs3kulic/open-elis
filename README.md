@@ -1,67 +1,89 @@
-# Open ELIS v0.1
+# ELIS - Therapist Matching API
 
-## Introduction
-**ELIS** (Easy Locator for Inclusive Support) is a non-profit project aimed at lowering barriers to mental health access. This repository contains the backend implementation of the ELIS API.
+A FastAPI-based backend service for matching users with therapists based on questionnaire responses and filtering criteria.
+
+## Project Structure
+
+```
+elis/
+├── app/
+│   ├── main.py                 # FastAPI app initialisation and router registration
+│   ├── endpoints/              # API endpoint modules
+│   │   ├── therapists.py       # Therapist listing and filtering
+│   │   ├── therapy_types.py    # Therapy type endpoints
+│   │   ├── therapy_methods.py  # Therapy method endpoints
+│   │   ├── therapy_clusters.py # Therapy cluster endpoints
+│   │   ├── calculate_result.py # Questionnaire processing
+│   │   └── root.py            # Root endpoint
+│   ├── utils/                 # Utility modules
+│   │   ├── auth.py           # API key validation
+│   │   ├── db.py             # Database session management
+│   │   ├── middleware.py     # CORS and other middleware
+│   │   └── api_key_generator.py # API key generation
+│   └── calculate_cluster.py   # Questionnaire scoring logic
+├── data/
+│   ├── models.py             # SQLAlchemy database models
+│   └── SessionLocal.py       # Database session configuration
+├── logs/
+│   └── worklog.md           # Development log
+└── tests/                   # Test files
+```
 
 ## Features
-- Provides information about therapists, their methods, and locations.
-- Supports filtering by:
-  - **Geographical location** (districts).
-  - **Therapy method** (e.g., CBT, psychoanalysis).
-  - **Years of experience**.
-- Recommends therapists based on user preferences and questionnaire results.
 
-## Technology Stack
-- **FastAPI**: A modern, high-performance web framework for building APIs with Python.
-- **SQLite**: Lightweight database for storing therapist data.
-- **SQLAlchemy**: ORM for database interactions.
-- **Sphinx**: For generating API documentation.
-
-## Requirements
-- Python 3.10+
-- FastAPI
-- SQLAlchemy
-- SQLite
-
-## Getting Started
-1. **Clone the repository**:
-   ```bash
-   git clone https://github.com/vs3kulic/open-elis.git
-   ```
-2. **Navigate to the project directory**:
-   ```bash
-   cd open-elis
-   ```
-3. **Create and activate a virtual environment**:
-   ```bash
-   python3 -m venv venv
-   source venv/bin/activate
-   ```
-4. **Install dependencies**:
-   ```bash
-   pip install -r requirements.txt
-   ```
-5. **Run the FastAPI application**:
-   ```bash
-   uvicorn app.main:app --reload
-   ```
-6. **Access the API documentation**:
-   - OpenAPI: [http://127.0.0.1:8000/docs](http://127.0.0.1:8000/docs)
-   - ReDoc: [http://127.0.0.1:8000/redoc](http://127.0.0.1:8000/redoc)
+- RESTful API for therapist data management
+- Questionnaire-based therapy cluster recommendation
+- Filtering and pagination for all endpoints
+- API key authentication
+- CORS support for frontend integration
 
 ## API Endpoints
-### `/calculate_result` (POST)
-- **Description**: Processes questionnaire responses and calculates the best therapy cluster.
-- **Request**: JSON payload with 26 responses.
-- **Response**: Recommended therapy cluster (`cluster_short`).
 
-### `/therapists` (GET)
-- **Description**: Retrieves a list of therapists with optional filtering.
-- **Query Parameters**:
-  - `cluster_short`: Filter by therapy cluster.
-  - `min_experience`: Minimum years of experience.
-  - `postal_code`: Filter by postal code.
-  - `therapy_method`: Filter by specific therapy method.
+### Authentication
+All endpoints require an `X-API-Key` header for authentication.
 
-## License
-This project is licensed under the MIT License.
+### Available Endpoints
+- `GET /` - API status and welcome message
+- `GET /therapists` - List therapists with filtering options
+- `GET /therapy_types` - List therapy types
+- `GET /therapy_methods` - List therapy methods
+- `GET /therapy_clusters` - List therapy clusters
+- `POST /calculate_result` - Process questionnaire responses
+
+### Query Parameters
+Most GET endpoints support:
+- `limit` - Number of results to return (default: 10)
+- `offset` - Number of results to skip (pagination)
+- `cluster_short` - Filter by therapy cluster
+
+Additional filters vary by endpoint (e.g., `postal_code`, `min_experience` for therapists).
+
+## Setup
+
+### Prerequisites
+- Python 3.11+
+- SQLite database with therapist data
+
+### Installation
+1. Clone the repository
+2. Create and activate a virtual environment:
+   ```bash
+   python -m venv venv
+   source venv/bin/activate  # On Windows: venv\Scripts\activate
+   ```
+3. Install dependencies:
+   ```bash
+   pip install fastapi uvicorn sqlalchemy python-dotenv
+   ```
+4. Create a `.env` file:
+   ```
+   API_KEY=your_generated_api_key
+   ALLOWED_ORIGINS=http://localhost:3000,http://127.0.0.1:3000
+   ```
+
+### Running the Server
+```bash
+uvicorn app.main:app --reload
+```
+
+The API will be available at `http://127.0.0.1:8000`.
