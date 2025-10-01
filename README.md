@@ -27,10 +27,6 @@ elis/
 │   ├── import_data.py        # CSV data import functionality
 │   ├── populate_tables.py    # Database table population
 │   └── run_mappings.py       # Therapy method and cluster mappings
-├── datafiles/
-│   ├── mapping.json          # Therapy method mappings
-│   ├── questions.json        # Questionnaire questions
-│   └── PTH-CSV-Liste-2025-09-13.csv # Therapist data
 ├── docs/
 │   └── own/
 │       ├── api_documentation.md # API endpoint documentation
