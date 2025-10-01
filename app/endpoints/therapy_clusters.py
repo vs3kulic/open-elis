@@ -1,4 +1,4 @@
-"""This module contains the theapy_clusters endpoint for retrieving therapy clusters."""
+"""This module contains the therapy_clusters endpoint for retrieving therapy clusters."""
 from fastapi import APIRouter, Query, Depends
 from sqlalchemy.orm import Session
 from data.models import TherapyMethodCluster
