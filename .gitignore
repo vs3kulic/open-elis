@@ -61,4 +61,5 @@ Thumbs.db
 
 # Local development scripts
 start.sh
+test.sh
 
