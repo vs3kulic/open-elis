@@ -4,6 +4,7 @@ Shared pytest configuration and fixtures for the Open ELIS API tests.
 This module contains reusable test fixtures and configuration that can be used
 across all test modules in the tests/ directory.
 """
+import json
 import os
 import pytest
 from dotenv import load_dotenv
@@ -44,3 +45,10 @@ def auth_headers():
     if not api_key:
         pytest.skip("API_KEY environment variable not set")
     return {"X-API-Key": api_key}
+
+@pytest.fixture
+def sample_questionnaire_payload():
+    """Load the complete questionnaire payload from mock_request.json."""
+    mock_file_path = os.path.join(os.path.dirname(__file__), "mock_request.json")
+    with open(mock_file_path, "r", encoding="utf-8") as f:
+        return json.load(f)
