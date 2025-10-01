@@ -16,15 +16,15 @@ Features
 * RESTful API for integration with frontend applications
 * Support for multiple therapy method clusters (PA, VT, SYS, PZ, G)
 
-API Modules
+App Modules
 -----------
 
 .. toctree::
    :maxdepth: 2
-   :caption: Contents:
+   :caption: Core Application:
 
+   calculations
    main
-   calculate_cluster
 
 API Endpoints
 -------------
@@ -40,6 +40,18 @@ API Endpoints
    endpoints.therapy_methods
    endpoints.therapy_types
 
+Utils Package
+-------------
+
+.. toctree::
+   :maxdepth: 2
+   :caption: Utilities:
+
+   utils.api_key_generator
+   utils.db_session
+   utils.middleware
+   utils.validate_api_key
+
 Data Package
 ------------
 
@@ -51,15 +63,6 @@ Data Package
    data.import_data
    data.populate_tables
    data.run_mappings
-
-Documentation Package
----------------------
-
-.. toctree::
-   :maxdepth: 2
-   :caption: Documentation:
-
-   docs
 
 Indices and tables
 ==================
