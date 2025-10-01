@@ -1,4 +1,10 @@
-"""This module contains the FastAPI apps and endpoints for the therapist database."""
+"""
+Open ELIS API - Main Application Module
+
+This module contains the FastAPI application for the Open ELIS therapy recommendation system.
+It sets up the main FastAPI instance, configures CORS middleware, and registers all API route handlers
+for therapy types, methods, clusters, therapists, and questionnaire result calculations.
+"""
 from fastapi import FastAPI
 from app.utils.middleware import add_cors_middleware
 from app.endpoints.calculate_result import router as calculate_result_router

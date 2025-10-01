@@ -23,8 +23,22 @@ API Modules
    :maxdepth: 2
    :caption: Contents:
 
-   calculate_cluster
    main
+   calculate_cluster
+
+API Endpoints
+-------------
+
+.. toctree::
+   :maxdepth: 2
+   :caption: Endpoints:
+
+   endpoints.calculate_result
+   endpoints.root
+   endpoints.therapists
+   endpoints.therapy_clusters
+   endpoints.therapy_methods
+   endpoints.therapy_types
 
 Indices and tables
 ==================
