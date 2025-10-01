@@ -50,5 +50,5 @@ def auth_headers():
 def sample_questionnaire_payload():
     """Load the complete questionnaire payload from mock_request.json."""
     mock_file_path = os.path.join(os.path.dirname(__file__), "mock_request.json")
-    with open(mock_file_path, "r", encoding="utf-8") as f:
+    with open(mock_file_path, "r", encoding="cp1252") as f:
         return json.load(f)

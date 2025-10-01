@@ -3,17 +3,18 @@ from .models import SessionLocal, TherapyMethodCluster, TherapyType
 from .run_mappings import THERAPY_CLUSTERS, THERAPY_TYPES
 
 def populate_tables():
+    """Populate the database with predefined therapy clusters and types."""
     session = SessionLocal()
 
     # Populate types
     for type_short, type_name in THERAPY_TYPES.items():
-        type = TherapyType(
+        therapy_type = TherapyType(
             type_short=type_short,
             type_name=type_name,
             description=f"{type_name} type description"
         )
-        session.add(type)
-        
+        session.add(therapy_type)
+
     # Populate clusters
     for cluster_short, cluster_name in THERAPY_CLUSTERS.items():
         cluster = TherapyMethodCluster(

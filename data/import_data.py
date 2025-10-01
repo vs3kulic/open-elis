@@ -1,17 +1,23 @@
 """This module contains utilities for importing external data sources."""
-import pandas as pd
 from datetime import datetime
+import pandas as pd
 from .models import SessionLocal, Therapist, TherapistAddress, TherapistContact, TherapyMethod
 
 def parse_date(date_str):
+    """Parse a date string in 'dd.mm.yy' format to a datetime.date object."""
     return datetime.strptime(date_str, '%d.%m.%y').date()
 
 def import_csv_data():
-    df = pd.read_csv("datafiles/PTH-CSV-Liste-2025-09-13.csv", sep=';', encoding='cp1252')
+    """Import therapist data from a CSV file into the database."""
+    df = pd.read_csv(
+        "datafiles/PTH-CSV-Liste-2025-09-13.csv", 
+        sep=';',
+        encoding='cp1252'
+    )
     session = SessionLocal()
 
     # Add therapists
-    for index, row in df.iterrows():
+    for _, row in df.iterrows():
         therapist = Therapist(
             last_name=row['Familien-/Nachname'],
             first_name=row['Vorname'] or '',
@@ -21,7 +27,7 @@ def import_csv_data():
         )
         session.add(therapist)
         session.flush()  # Flush to get therapist.id
-        
+
         # Add therapist contact
         contact = TherapistContact(
             email=row['Email1'],
@@ -29,7 +35,7 @@ def import_csv_data():
             therapist=therapist  # Associate contact with therapist
         )
         session.add(contact)
-        
+
         # Add therapist address
         address = TherapistAddress(
             state=row['Berufssitz Bundesland 1'],
@@ -42,7 +48,11 @@ def import_csv_data():
         methods = row['PTH-Methoden'].split(',')
         for method in methods:
             # Check if method already exists
-            therapy_method = session.query(TherapyMethod).filter_by(method_name=method.strip()).first()
+            therapy_method = session.query(
+                TherapyMethod
+                ).filter_by(
+                    method_name=method.strip()
+            ).first()
             if not therapy_method:
                 therapy_method = TherapyMethod(method_name=method.strip())
                 session.add(therapy_method)

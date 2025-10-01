@@ -49,7 +49,7 @@ def test_get_therapy_types(test_client, auth_headers):
     assert isinstance(data, list)
     assert len(data) > 0  # Check that the list is not empty
 
-def test_calculate_result(test_client, auth_headers, sample_questionnaire_payload):
+def test_calculate_results(test_client, auth_headers, sample_questionnaire_payload):
     """Test the POST /calculate_result endpoint with full questionnaire data."""
     response = test_client.post("/calculate_results", json=sample_questionnaire_payload, headers=auth_headers)
     assert response.status_code == 200
