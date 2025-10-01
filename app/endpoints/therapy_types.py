@@ -1,9 +1,9 @@
-"""This module contains the therapy_types endpoint for retrieving therapy methods."""
+"""This module contains the therapy_types endpoint for retrieving therapy types."""
 from fastapi import APIRouter, Query, Depends
 from sqlalchemy.orm import Session
 from data.models import TherapyType, TherapyMethodCluster
 from app.utils.validate_api_key import validate_api_key
-from app.utils.db import get_db
+from app.utils.db_session import get_db
 
 # ------------------------------
 # Endpoint definition

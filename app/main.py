@@ -4,6 +4,9 @@ Open ELIS API - Main Application Module
 This module contains the FastAPI application for the Open ELIS therapy recommendation system.
 It sets up the main FastAPI instance, configures CORS middleware, and registers all API route handlers
 for therapy types, methods, clusters, therapists, and questionnaire result calculations.
+
+Author: Vajo Sekulic
+Version: 0.1.0
 """
 from fastapi import FastAPI
 from app.utils.middleware import add_cors_middleware
