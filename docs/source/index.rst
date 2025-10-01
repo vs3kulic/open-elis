@@ -40,6 +40,27 @@ API Endpoints
    endpoints.therapy_methods
    endpoints.therapy_types
 
+Data Package
+------------
+
+.. toctree::
+   :maxdepth: 2
+   :caption: Data Management:
+
+   data.models
+   data.import_data
+   data.populate_tables
+   data.run_mappings
+
+Documentation Package
+---------------------
+
+.. toctree::
+   :maxdepth: 2
+   :caption: Documentation:
+
+   docs
+
 Indices and tables
 ==================
 
