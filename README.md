@@ -98,3 +98,8 @@ uvicorn app.main:app --reload
 ```
 
 The API will be available at `http://127.0.0.1:8000`.
+
+## Documentation
+Comprehensive documentation is available on [ReadTheDocs](https://open-elis.readthedocs.io/en/latest/index.html).
+
+[![Documentation Status](https://readthedocs.org/projects/open-elis/badge/?version=latest)](https://open-elis.readthedocs.io/en/latest/)

@@ -1,3 +1,4 @@
+"""This module contains SQLAlchemy database models for therapy data."""
 from sqlalchemy import Table, Column, Integer, String, Date, ForeignKey, create_engine
 from sqlalchemy.orm import sessionmaker, relationship, declarative_base
 
