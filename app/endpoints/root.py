@@ -11,4 +11,4 @@ def read_root():
     :return: A welcome message.
     :rtype: dict
     """
-    return {"message": "Welcome to the Therapist Database API!"}
+    return {"message": "Welcome to the ELIS API! Your gateway to personalised therapy recommendations."}
